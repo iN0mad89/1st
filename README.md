@@ -18,4 +18,9 @@ python -m src.main --input data --output output/results.csv
 
 This runs the rule-based classifier on all text files under `data/` and writes the classification results to `output/results.csv`.
 
+The CSV file contains a `comment` column that lists each matched pattern along
+with a short snippet of the surrounding text (about 450 characters around the
+match). Newlines inside these snippets are escaped as ``\n`` so each row stays
+on a single line. This provides context for why a category was assigned.
+
 See `docs/architecture.md` for an overview of the modules and `docs/roadmap.md` for ideas on next steps.
