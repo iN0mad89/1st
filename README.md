@@ -19,3 +19,17 @@ python -m src.main --input data --output output/results.csv
 This runs the rule-based classifier on all text files under `data/` and writes the classification results to `output/results.csv`.
 
 See `docs/architecture.md` for an overview of the modules and `docs/roadmap.md` for ideas on next steps.
+
+## Analyzing results
+
+The `src.analysis` module helps inspect the CSV produced by the classifier.
+`count_categories` aggregates the number of documents per category, while
+`plot_counts` can visualise these statistics using `matplotlib`.
+
+```python
+from pathlib import Path
+from src.analysis import count_categories, plot_counts
+
+counts = count_categories(Path("output/results.csv"))
+plot_counts(counts, Path("output/summary.png"))
+```
