@@ -1,3 +1,5 @@
+"""Utilities for exporting classification results."""
+
 import csv
 from pathlib import Path
 from typing import Dict
@@ -7,6 +9,7 @@ from .explanation import Explanation
 
 
 def write_csv(results: Dict[str, Dict[str, Explanation]], output_path: Path) -> None:
+    """Write classifier results to ``output_path`` in CSV format."""
     with output_path.open('w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         header = ['document'] + CATEGORY_PRIORITY + ['comment']
