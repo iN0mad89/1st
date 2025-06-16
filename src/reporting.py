@@ -21,6 +21,6 @@ def write_csv(results: Dict[str, Dict[str, Explanation]], output_path: Path) -> 
                     row.append('1')
                 else:
                     row.append('')
-            explanations = [categories[cat].as_text() for cat in CATEGORY_PRIORITY if cat in categories]
+            explanations = [categories[cat].as_text() for cat in categories]
             row.append(' | '.join(explanations))
             writer.writerow(row)
