@@ -10,3 +10,12 @@ def test_snippet_length():
     exp = results['Інститут']
     snippet = exp.snippets[0]
     assert 450 <= len(snippet) <= 460
+
+
+def test_snippet_escapes_newlines():
+    text = "start\nінститут\nend"
+    clf = RuleBasedClassifier(pathlib.Path('criteria.yml'))
+    results = clf.classify(text)
+    snippet = results['Інститут'].snippets[0]
+    assert "\\n" in snippet
+    assert "\n" not in snippet
