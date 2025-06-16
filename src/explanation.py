@@ -10,13 +10,15 @@ class Explanation:
     category: str
     matches: List[str] = field(default_factory=list)
     patterns: List[str] = field(default_factory=list)
+    snippets: List[str] = field(default_factory=list)
 
-    def add_match(self, pattern: str, text: str) -> None:
-        """Record a ``pattern`` that matched the provided text fragment."""
+    def add_match(self, pattern: str, text: str, snippet: str) -> None:
+        """Record a ``pattern`` that matched ``text`` with surrounding ``snippet``."""
         self.matches.append(text)
         self.patterns.append(pattern)
+        self.snippets.append(snippet)
 
     def as_text(self) -> str:
-        """Return a semicolon-separated summary of matches."""
-        pairs = [f"{p} -> {m}" for p, m in zip(self.patterns, self.matches)]
+        """Return a semicolon-separated summary of matches using snippets."""
+        pairs = [f"{p} -> {s}" for p, s in zip(self.patterns, self.snippets)]
         return '; '.join(pairs)
