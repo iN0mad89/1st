@@ -1,9 +1,14 @@
+"""Loading of classification criteria used by the rule-based classifier."""
+
 from pathlib import Path
 from typing import Dict, List
 
 
 class CriteriaLoader:
+    """Parse a criteria definition file and expose pattern lists."""
+
     def __init__(self, path: Path):
+        """Create loader for a criteria file located at ``path``."""
         self.path = path
         self.criteria = self._load()
 
@@ -23,4 +28,5 @@ class CriteriaLoader:
         return data
 
     def patterns_for(self, category: str) -> List[str]:
+        """Return regex patterns registered for ``category``."""
         return self.criteria.get(category, {}).get('patterns', [])
