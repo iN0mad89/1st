@@ -24,7 +24,10 @@ class RuleBasedClassifier:
             for pattern in patterns:
                 m = re.search(pattern, text)
                 if m:
+                    snippet_start = max(m.start() - 225, 0)
+                    snippet_end = min(m.end() + 225, len(text))
+                    snippet = text[snippet_start:snippet_end]
                     if category not in results:
                         results[category] = Explanation(category)
-                    results[category].add_match(pattern, m.group(0))
+                    results[category].add_match(pattern, m.group(0), snippet)
         return results
