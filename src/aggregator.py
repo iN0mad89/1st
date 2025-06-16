@@ -11,7 +11,7 @@ def gather_documents(input_dir: Path) -> List[Tuple[str, str]]:
     raised.
     """
     groups = {}
-    for path in input_dir.glob('*.txt'):
+    for path in sorted(input_dir.glob('*.txt')):
         stem = path.stem.split('_')[0]  # assumes `act1_part1.txt` pattern
         groups.setdefault(stem, []).append(path)
 
