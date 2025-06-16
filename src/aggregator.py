@@ -7,8 +7,8 @@ def gather_documents(input_dir: Path) -> List[Tuple[str, str]]:
 
     Each file is decoded as UTF-8 first. On ``UnicodeDecodeError`` the
     function attempts ``cp1251``. If decoding still fails the file is read in
-    binary mode and decoded with ``errors='replace'`` so an exception is never
-    raised.
+    binary mode and decoded using UTF-8 with ``errors='replace'`` so an
+    exception is never raised.
     """
     groups = {}
     for path in input_dir.glob('*.txt'):
