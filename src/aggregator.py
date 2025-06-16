@@ -5,10 +5,10 @@ from typing import List, Tuple
 def gather_documents(input_dir: Path) -> List[Tuple[str, str]]:
     """Return list of ``(doc_name, text)`` combining files with the same stem.
 
-    Files are expected to be UTF-8 encoded. If a file fails to decode with
-    UTF-8, the function will retry using common Windows encodings such as
-    ``cp1251``. As a last resort the file is read in binary mode and decoded
-    using ``errors='replace'`` so decoding never raises ``UnicodeDecodeError``.
+    Each file is decoded as UTF-8 first. On ``UnicodeDecodeError`` the
+    function attempts ``cp1251``. If decoding still fails the file is read in
+    binary mode and decoded with ``errors='replace'`` so an exception is never
+    raised.
     """
     groups = {}
     for path in input_dir.glob('*.txt'):
